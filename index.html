@@ -5,23 +5,183 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Math Blitz Football</title>
   
-  <!-- Link CSS properly -->
   <link rel="stylesheet" href="./css/styles.css">
   <link rel="stylesheet" href="./css/team-avatars.css">
 </head>
 <body>
   <div class="container">
     <h1>Math Blitz Football</h1>
-    <div class="welcome-screen" id="welcome-screen"></div>
-    <div class="difficulty-screen" id="difficulty-screen"></div>
-    <div id="game-interface" style="display: none;"></div>
-    <div class="stats-modal" id="stats-modal"></div>
+    
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcome-screen">
+      <h2>Welcome to Math Blitz!</h2>
+      <input type="text" 
+             class="name-input" 
+             id="player-name" 
+             placeholder="Enter your name (letters and numbers only)"
+             maxlength="20">
+      <div class="error-message" id="name-error"></div>
+      
+      <h3>Choose Your Player</h3>
+      <div class="avatar-selection">
+        <div class="avatar-option bengals" data-team="bengals">
+          <div class="helmet-icon">
+            <div class="helmet-shell">
+              <div class="helmet-facemask"></div>
+            </div>
+            <span class="avatar-number">85</span>
+          </div>
+          <span>Bengals</span>
+        </div>
+        <div class="avatar-option eagles" data-team="eagles">
+          <div class="helmet-icon">
+            <div class="helmet-shell">
+              <div class="helmet-facemask"></div>
+            </div>
+            <span class="avatar-number">11</span>
+          </div>
+          <span>Eagles</span>
+        </div>
+        <div class="avatar-option cowboys" data-team="cowboys">
+          <div class="helmet-icon">
+            <div class="helmet-shell">
+              <div class="helmet-facemask"></div>
+            </div>
+            <span class="avatar-number">88</span>
+          </div>
+          <span>Cowboys</span>
+        </div>
+        <div class="avatar-option niners" data-team="niners">
+          <div class="helmet-icon">
+            <div class="helmet-shell">
+              <div class="helmet-facemask"></div>
+            </div>
+            <span class="avatar-number">85</span>
+          </div>
+          <span>49ers</span>
+        </div>
+        <div class="avatar-option bills" data-team="bills">
+          <div class="helmet-icon">
+            <div class="helmet-shell">
+              <div class="helmet-facemask"></div>
+            </div>
+            <span class="avatar-number">17</span>
+          </div>
+          <span>Bills</span>
+        </div>
+        <div class="avatar-option chiefs" data-team="chiefs">
+          <div class="helmet-icon">
+            <div class="helmet-shell">
+              <div class="helmet-facemask"></div>
+            </div>
+            <span class="avatar-number">87</span>
+          </div>
+          <span>Chiefs</span>
+        </div>
+      </div>
+      <button class="start-button" id="start-button" disabled>Start Game</button>
+    </div>
+
+    <!-- Difficulty Selection Screen -->
+    <div class="difficulty-screen" id="difficulty-screen" style="display: none;">
+      <h2>Select Your Difficulty</h2>
+      <button class="difficulty-button" data-difficulty="rookie">
+        Rookie
+        <span class="description">Basic Single Digit Multiplication (1-9)</span>
+      </button>
+      <button class="difficulty-button" data-difficulty="pro">
+        Pro
+        <span class="description">Times Tables (5-9)</span>
+      </button>
+      <button class="difficulty-button" data-difficulty="allPro">
+        All Pro
+        <span class="description">Double Digit × Single Digit</span>
+      </button>
+      <button class="difficulty-button" data-difficulty="allMadden">
+        All Madden
+        <span class="description">Double/Triple Digit × Double Digit</span>
+      </button>
+    </div>
+
+    <!-- Game Interface -->
+    <div id="game-interface" style="display: none;">
+      <div class="player-info">
+        <div class="player-avatar" id="player-avatar"></div>
+        <span id="player-name-display"></span>
+      </div>
+      
+      <div class="scoreboard">
+        <div class="scoreboard-item">Down: <span id="down">1</span></div>
+        <div class="scoreboard-item">To Go: <span id="to-go">10</span></div>
+        <div class="scoreboard-item">Ball On: <span id="field-position">20</span></div>
+        <div class="scoreboard-item">Time: <span id="timer">0:00</span></div>
+      </div>
+
+      <div class="field-container">
+        <div class="yard-markers">
+          <div class="yard-marker">0</div>
+          <div class="yard-marker">10</div>
+          <div class="yard-marker">20</div>
+          <div class="yard-marker">30</div>
+          <div class="yard-marker">40</div>
+          <div class="yard-marker">50</div>
+          <div class="yard-marker">40</div>
+          <div class="yard-marker">30</div>
+          <div class="yard-marker">20</div>
+          <div class="yard-marker">10</div>
+          <div class="yard-marker">0</div>
+        </div>
+        <div class="football" id="football"></div>
+        <div class="player" id="player"></div>
+      </div>
+
+      <div class="game-screen" id="game-screen">
+        <div class="question" id="question"></div>
+        <div class="answer-display" id="answer-display">0</div>
+        <div class="keypad" id="keypad"></div>
+        <button class="submit-button" id="submit-button">SNAP!</button>
+      </div>
+    </div>
+
+    <!-- Stats Modal -->
+    <div class="stats-modal" id="stats-modal">
+      <h2>Drive Summary</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div>Difficulty Level</div>
+          <div id="difficulty-level">Rookie</div>
+        </div>
+        <div class="stat-item">
+          <div>Average Time</div>
+          <div id="avg-time">0s</div>
+        </div>
+        <div class="stat-item">
+          <div>Accuracy</div>
+          <div id="accuracy">0%</div>
+        </div>
+        <div class="stat-item">
+          <div>Total Yards</div>
+          <div id="total-yards">0</div>
+        </div>
+        <div class="stat-item">
+          <div>First Downs</div>
+          <div id="first-downs">0</div>
+        </div>
+        <div class="stat-item">
+          <div>Total Questions</div>
+          <div id="total-questions">0</div>
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button class="modal-button" onclick="startNewDrive()">New Drive</button>
+        <button class="modal-button print-button" onclick="printStats()">Print Stats</button>
+      </div>
+    </div>
   </div>
 
-  <!-- ✅ Only JavaScript files use type="module" -->
-  <script type="module" src="./js/welcome-screen.js"></script>
-  <script type="module" src="./js/difficulty-screen.js"></script>
-  <script type="module" src="./js/game.js"></script>
-  <script type="module" src="./js/stats-modal.js"></script>
+  <script src="./js/welcome-screen.js"></script>
+  <script src="./js/difficulty-screen.js"></script>
+  <script src="./js/game.js"></script>
+  <script src="./js/stats-modal.js"></script>
 </body>
 </html>
