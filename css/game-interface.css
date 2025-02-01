@@ -1,118 +1,194 @@
-/* Base Styles */
-<div id="game-interface">
-  <div class="scoreboard">
-    <div class="scoreboard-item">Down: <span id="down">1</span></div>
-    <div class="scoreboard-item">To Go: <span id="to-go">10</span></div>
-    <div class="scoreboard-item">Ball On: <span id="field-position">20</span></div>
-    <div class="scoreboard-item">Time: <span id="timer">0:00</span></div>
-  </div>
-
-  <div class="field-container">
-    <div class="yard-markers">
-      <div class="yard-marker">0</div>
-      <div class="yard-marker">10</div>
-      <div class="yard-marker">20</div>
-      <div class="yard-marker">30</div>
-      <div class="yard-marker">40</div>
-      <div class="yard-marker">50</div>
-      <div class="yard-marker">40</div>
-      <div class="yard-marker">30</div>
-      <div class="yard-marker">20</div>
-      <div class="yard-marker">10</div>
-      <div class="yard-marker">0</div>
-    </div>
-    <div class="football" id="football"></div>
-    <div class="player" id="player"></div>
-  </div>
-
-  <div class="game-screen" id="game-screen">
-    <div class="question" id="question"></div>
-    <div class="answer-display" id="answer-display">0</div>
-    <div class="keypad" id="keypad"></div>
-    <button class="submit-button" id="submit-button">SNAP!</button>
-  </div>
-</div>
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #0b3d91;
-  color: white;
-  margin: 0;
-  padding: 20px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.container {
-  max-width: 500px;
-  width: 100%;
-}
-
-h1 {
-  font-size: 2.5em;
-  margin-bottom: 20px;
-  text-align: center;
-  text-shadow: 2px 2px #ffb400;
-}
-
-/* Team Colors */
-.bengals { background: #FB4F14; color: #000000; }
-.eagles { background: #004C54; color: #A5ACAF; }
-.cowboys { background: #003594; color: #869397; }
-.niners { background: #AA0000; color: #B3995D; }
-.bills { background: #00338D; color: #C60C30; }
-.chiefs { background: #E31837; color: #FFB81C; }
-
-/* Notification Styles */
-.notification-overlay {
+/* Game Interface Styles */
+#game-interface {
   display: none;
-  position: fixed;
+}
+
+.scoreboard {
+  background: #062b59;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.scoreboard-item {
+  text-align: center;
+  padding: 5px;
+  background: #0b3d91;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+.field-container {
+  background: #2d5a27;
+  height: 400px;
+  position: relative;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-image: repeating-linear-gradient(
+    to right,
+    #2d5a27,
+    #2d5a27 9%,
+    #275423 9%,
+    #275423 10%
+  );
+  border: 2px solid white;
+}
+
+.yard-markers {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
 }
 
-.notification-content {
+.yard-marker {
+  color: white;
+  font-size: 16px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.football {
+  position: absolute;
+  left: 20%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 30px;
+  background: #964B00;
+  border-radius: 50%;
+  transition: left 0.5s;
+  z-index: 2;
+}
+
+.player {
+  position: absolute;
+  width: 30px;
+  height: 60px;
+  background: #ffb400;
+  bottom: 0;
+  left: 20%;
+  transition: left 0.5s;
+  z-index: 1;
+}
+
+.game-screen {
+  background: #062b59;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  display: none;
+}
+
+.question {
+  font-size: 2.5em;
   text-align: center;
-  padding: 40px;
-  border-radius: 20px;
-  animation: scaleIn 0.5s ease-out;
-}
-
-.notification-content h2 {
-  font-size: 3em;
   margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  white-space: pre-line;
+  background: #0b3d91;
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
 }
 
-.notification-content.success {
-  background: linear-gradient(135deg, #2ecc71, #27ae60);
+.answer-display {
+  background: #1a1a1a;
+  color: #ffd700;
+  padding: 10px 15px;
+  text-align: right;
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-.notification-content.warning {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
-@keyframes scaleIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+.keypad button {
+  font-size: 1.8em;
+  padding: 15px;
+  background-color: #ffb400;
+  color: #0b3d91;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 3px 3px #062b59;
+  font-weight: bold;
+  transition: transform 0.2s;
 }
 
-/* Print Styles */
-@media print {
-  body {
-    background: white;
-    color: black;
+.keypad button:hover {
+  transform: scale(1.05);
+}
+
+.submit-button {
+  width: 100%;
+  padding: 15px;
+  background: #ffb400;
+  border: none;
+  border-radius: 10px;
+  color: #0b3d91;
+  font-size: 1.4em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.submit-button:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .field-container {
+    height: 300px;
   }
-  .stat-item {
-    border: 1px solid black;
+
+  .yard-marker {
+    font-size: 14px;
+  }
+
+  .football {
+    width: 30px;
+    height: 20px;
+  }
+
+  .player {
+    width: 20px;
+    height: 40px;
+  }
+
+  .question {
+    font-size: 2em;
+  }
+
+  .answer-display {
+    font-size: 1.5em;
+    min-height: 40px;
+  }
+
+  .keypad button {
+    font-size: 1.5em;
+  }
+
+  .submit-button {
+    font-size: 1.2em;
   }
 }
