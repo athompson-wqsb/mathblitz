@@ -1,6 +1,3 @@
-import '../css/styles.css';
-import '../css/team-avatars.css';
-
 // JavaScript code for the welcome screen
 function initializeWelcomeScreen() {
   const nameInput = document.getElementById('player-name');
@@ -54,3 +51,6 @@ function initializeWelcomeScreen() {
     }
   });
 }
+
+// Ensure script executes only after DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeWelcomeScreen);
