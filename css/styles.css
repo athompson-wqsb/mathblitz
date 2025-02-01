@@ -1,4 +1,4 @@
-/* General styles for the game */
+/* Math Blitz Football Styling */
 body {
   font-family: Arial, sans-serif;
   background-color: #0b3d91;
@@ -54,7 +54,60 @@ h1 {
   box-shadow: 0 0 5px #ffb400;
 }
 
-/* Difficulty Selection Screen */
+/* Avatar Selection */
+.avatar-selection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.avatar-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.avatar-option:hover {
+  transform: scale(1.02);
+}
+
+.avatar-option.selected {
+  border-color: #ffb400;
+  transform: scale(1.05);
+}
+
+.avatar-icon {
+  width: 40px;
+  height: 80px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-number {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Team Colors */
+.bengals { background: #FB4F14; color: #000000; }
+.eagles { background: #004C54; color: #A5ACAF; }
+.cowboys { background: #003594; color: #869397; }
+.niners { background: #AA0000; color: #B3995D; }
+.bills { background: #00338D; color: #C60C30; }
+.chiefs { background: #E31837; color: #FFB81C; }
+
+/* Difficulty Selection */
 .difficulty-screen {
   display: none;
   background: #062b59;
@@ -79,29 +132,6 @@ h1 {
   transition: all 0.3s;
 }
 
-.difficulty-button .description {
-  font-size: 0.8em;
-  opacity: 0.8;
-  display: block;
-  margin-top: 5px;
-}
-
-.difficulty-button.locked {
-  background: #cccccc;
-  cursor: not-allowed;
-  opacity: 0.7;
-  color: #666;
-}
-
-.difficulty-button.locked::after {
-  content: "🔒";
-  margin-left: 10px;
-}
-
-.difficulty-button.unlocked {
-  background: #ffb400;
-}
-
 /* Game Interface */
 #game-interface {
   display: none;
@@ -124,4 +154,33 @@ h1 {
   border-radius: 5px;
 }
 
-/* Add more styles as needed */
+/* Keypad */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.keypad button {
+  font-size: 1.5em;
+  padding: 15px;
+  background-color: #ffb400;
+  color: #0b3d91;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 3px 3px #062b59;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 15px;
+  background: #ffb400;
+  border: none;
+  border-radius: 10px;
+  color: #0b3d91;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+}
