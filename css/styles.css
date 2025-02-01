@@ -1,4 +1,4 @@
-/* Math Blitz Football Styling */
+/* Restored Full CSS Styling from Last Working Version */
 body {
   font-family: Arial, sans-serif;
   background-color: #0b3d91;
@@ -23,138 +23,35 @@ h1 {
   text-shadow: 2px 2px #ffb400;
 }
 
-/* Welcome Screen Styles */
-.welcome-screen {
+/* Game Screen */
+.game-screen {
   background: #062b59;
   padding: 20px;
   border-radius: 15px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.welcome-screen h2 {
-  color: white;
-  margin-bottom: 20px;
-}
-
-.name-input {
-  width: 90%;
-  padding: 12px;
-  margin: 15px 0;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.2em;
-  text-align: center;
-  background: white;
-  color: #0b3d91;
-}
-
-.name-input:focus {
-  outline: 2px solid #ffb400;
-  box-shadow: 0 0 5px #ffb400;
-}
-
-/* Avatar Selection */
-.avatar-selection {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin: 20px 0;
-}
-
-.avatar-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  border: 3px solid transparent;
-  transition: all 0.2s;
-}
-
-.avatar-option:hover {
-  transform: scale(1.02);
-}
-
-.avatar-option.selected {
-  border-color: #ffb400;
-  transform: scale(1.05);
-}
-
-.avatar-icon {
-  width: 40px;
-  height: 80px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.avatar-number {
-  color: white;
-  font-weight: bold;
-  font-size: 1.2em;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-/* Team Colors */
-.bengals { background: #FB4F14; color: #000000; }
-.eagles { background: #004C54; color: #A5ACAF; }
-.cowboys { background: #003594; color: #869397; }
-.niners { background: #AA0000; color: #B3995D; }
-.bills { background: #00338D; color: #C60C30; }
-.chiefs { background: #E31837; color: #FFB81C; }
-
-/* Difficulty Selection */
-.difficulty-screen {
-  display: none;
-  background: #062b59;
-  padding: 20px;
-  border-radius: 15px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.difficulty-button {
-  display: block;
-  width: 100%;
-  padding: 15px;
-  margin: 10px 0;
-  background: #ffb400;
-  border: none;
-  border-radius: 10px;
-  color: #0b3d91;
-  cursor: pointer;
-  font-size: 1.2em;
-  font-weight: bold;
-  transition: all 0.3s;
-}
-
-/* Game Interface */
-#game-interface {
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
   display: none;
 }
 
-.scoreboard {
-  background: #062b59;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.scoreboard-item {
+.question {
+  font-size: 2em;
   text-align: center;
-  padding: 5px;
+  margin-bottom: 20px;
   background: #0b3d91;
-  border-radius: 5px;
+  padding: 15px;
+  border-radius: 10px;
 }
 
-/* Keypad */
+.answer-display {
+  background: #1a1a1a;
+  color: #ffd700;
+  padding: 10px;
+  text-align: right;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  min-height: 40px;
+}
+
 .keypad {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
