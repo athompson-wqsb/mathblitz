@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Math Blitz Football</title>
   
-  <!-- Correctly linked CSS files -->
+  <!-- Link to CSS files -->
   <link rel="stylesheet" href="./css/styles.css">
   <link rel="stylesheet" href="./css/team-avatars.css">
 </head>
@@ -23,13 +23,26 @@
     </div>
 
     <!-- Difficulty Selection Screen -->
-    <div class="difficulty-screen" id="difficulty-screen" style="display: none;"></div>
+    <div class="difficulty-screen" id="difficulty-screen" style="display: none;">
+      <h2>Select Difficulty</h2>
+      <button class="difficulty-button" data-difficulty="easy">Easy</button>
+      <button class="difficulty-button" data-difficulty="medium">Medium</button>
+      <button class="difficulty-button" data-difficulty="hard">Hard</button>
+    </div>
 
     <!-- Game Interface -->
-    <div id="game-interface" style="display: none;"></div>
+    <div id="game-interface" style="display: none;">
+      <h2>Game Screen</h2>
+      <div id="game-content"></div>
+    </div>
 
     <!-- Stats Modal -->
-    <div class="stats-modal" id="stats-modal"></div>
+    <div class="stats-modal" id="stats-modal" style="display: none;">
+      <h2>Game Stats</h2>
+      <p>Difficulty Level: <span id="difficulty-level"></span></p>
+      <p>Accuracy: <span id="accuracy"></span></p>
+      <button id="stats-button">Close Stats</button>
+    </div>
   </div>
 
   <!-- JavaScript files with defer to ensure proper loading order -->
