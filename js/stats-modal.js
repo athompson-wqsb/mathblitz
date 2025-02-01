@@ -1,65 +1,42 @@
-// JavaScript code for the stats modal
-function showStats() {
-  const modal = document.getElementById('stats-modal');
-  if (!modal) return;
-  
-  const avgTime = gameState.driveStats.attempts ? 
-    (gameState.driveStats.totalTime / gameState.driveStats.attempts).toFixed(1) : 0;
-  const accuracy = gameState.driveStats.attempts ? 
-    ((gameState.driveStats.correct / gameState.driveStats.attempts) * 100).toFixed(1) : 0;
+// JavaScript for the Stats Modal
 
-  // Initialize level progression tracking if not exists
-  if (!gameState.levelProgressAttempts) {
-    gameState.levelProgressAttempts = {
-      rookie: { attempts: 0, successfulAttempts: 0 },
-      pro: { attempts: 0, successfulAttempts: 0 },
-      allPro: { attempts: 0, successfulAttempts: 0 },
-      allMadden: { attempts: 0, successfulAttempts: 0 }
-    };
-  }
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("Stats modal script loaded.");
 
-  document.getElementById('difficulty-level').innerText = gameState.difficulty || 'N/A';
-  document.getElementById('avg-time').innerText = `${avgTime}s`;
-  document.getElementById('accuracy').innerText = `${accuracy}%`;
-  document.getElementById('total-yards').innerText = gameState.driveStats.totalYards || 0;
-  document.getElementById('first-downs').innerText = gameState.driveStats.firstDowns || 0;
-  document.getElementById('total-questions').innerText = gameState.driveStats.attempts || 0;
+    // Get stats modal elements
+    const statsModal = document.getElementById("stats-modal");
+    const difficultyLevel = document.getElementById("difficulty-level");
+    const accuracyDisplay = document.getElementById("accuracy");
+    const statsButton = document.getElementById("stats-button");
 
-  // Save results to CSV
-  saveGameResults();
+    // Ensure elements exist before proceeding
+    if (!statsModal || !difficultyLevel || !accuracyDisplay || !statsButton) {
+        console.error("Missing required elements for stats modal.");
+        return;
+    }
 
-  // Clear existing buttons except print
-  const buttonContainer = document.querySelector('.modal-buttons');
-  if (!buttonContainer) return;
-  buttonContainer.innerHTML = '<button class="modal-button print-button" onclick="printStats()">Print Stats</button>';
+    // Function to update and show stats
+    function showStats() {
+        console.log("Displaying stats...");
+        
+        const difficulty = sessionStorage.getItem("gameDifficulty") || "Unknown";
+        const totalQuestions = sessionStorage.getItem("totalQuestions") || 0;
+        const correctAnswers = sessionStorage.getItem("correctAnswers") || 0;
+        
+        const accuracy = totalQuestions > 0 ? ((correctAnswers / totalQuestions) * 100).toFixed(1) + "%" : "N/A";
+        
+        difficultyLevel.textContent = difficulty;
+        accuracyDisplay.textContent = accuracy;
 
-  // Add level selection button
-  const levelSelectButton = document.createElement('button');
-  levelSelectButton.className = 'modal-button';
-  levelSelectButton.style.background = '#0b3d91';
-  levelSelectButton.style.color = 'white';
-  levelSelectButton.innerText = 'Choose Level';
-  levelSelectButton.onclick = returnToLevelSelect;
-  buttonContainer.appendChild(levelSelectButton);
+        statsModal.style.display = "block";
+    }
 
-  // Add retry button
-  const retryButton = document.createElement('button');
-  retryButton.className = 'modal-button';
-  retryButton.style.background = '#ffb400';
-  retryButton.innerText = 'Retry This Level';
-  retryButton.onclick = () => {
-    modal.style.display = 'none';
-    startGame(gameState.difficulty);
-  };
-  buttonContainer.appendChild(retryButton);
+    // Add event listener to stats button
+    statsButton.addEventListener("click", () => {
+        statsModal.style.display = "none";
+        console.log("Stats modal closed.");
+    });
 
-  modal.style.display = 'block';
-}
-
-// Ensure script executes only after DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  const statsButton = document.getElementById('stats-button');
-  if (statsButton) {
-    statsButton.addEventListener('click', showStats);
-  }
+    // Automatically show stats when the game ends
+    window.addEventListener("gameEnded", showStats);
 });
