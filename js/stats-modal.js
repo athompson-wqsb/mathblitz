@@ -1,6 +1,8 @@
 // JavaScript code for the stats modal
 function showStats() {
   const modal = document.getElementById('stats-modal');
+  if (!modal) return;
+  
   const avgTime = gameState.driveStats.attempts ? 
     (gameState.driveStats.totalTime / gameState.driveStats.attempts).toFixed(1) : 0;
   const accuracy = gameState.driveStats.attempts ? 
@@ -16,18 +18,19 @@ function showStats() {
     };
   }
 
-  document.getElementById('difficulty-level').innerText = gameState.difficulty;
+  document.getElementById('difficulty-level').innerText = gameState.difficulty || 'N/A';
   document.getElementById('avg-time').innerText = `${avgTime}s`;
   document.getElementById('accuracy').innerText = `${accuracy}%`;
-  document.getElementById('total-yards').innerText = gameState.driveStats.totalYards;
-  document.getElementById('first-downs').innerText = gameState.driveStats.firstDowns;
-  document.getElementById('total-questions').innerText = gameState.driveStats.attempts;
+  document.getElementById('total-yards').innerText = gameState.driveStats.totalYards || 0;
+  document.getElementById('first-downs').innerText = gameState.driveStats.firstDowns || 0;
+  document.getElementById('total-questions').innerText = gameState.driveStats.attempts || 0;
 
   // Save results to CSV
   saveGameResults();
 
   // Clear existing buttons except print
   const buttonContainer = document.querySelector('.modal-buttons');
+  if (!buttonContainer) return;
   buttonContainer.innerHTML = '<button class="modal-button print-button" onclick="printStats()">Print Stats</button>';
 
   // Add level selection button
@@ -50,17 +53,13 @@ function showStats() {
   };
   buttonContainer.appendChild(retryButton);
 
-  // Check level progression based on difficulty
-  let canProgressLevel = false;
-  let progressMessage = '';
-  const currentLevel = gameState.difficulty;
-  const levelStats = gameState.levelProgressAttempts[currentLevel];
-
-  // Increment total attempts
-  levelStats.attempts++;
-
-  // Check if this attempt qualifies for progression
-  // (code omitted for brevity)
-
   modal.style.display = 'block';
 }
+
+// Ensure script executes only after DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const statsButton = document.getElementById('stats-button');
+  if (statsButton) {
+    statsButton.addEventListener('click', showStats);
+  }
+});
