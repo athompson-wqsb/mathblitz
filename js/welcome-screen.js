@@ -1,8 +1,16 @@
 // JavaScript code for the welcome screen
 function initializeWelcomeScreen() {
+  console.log("Initializing welcome screen...");
   const nameInput = document.getElementById('player-name');
   const startButton = document.getElementById('start-button');
   const avatarOptions = document.querySelectorAll('.avatar-option');
+  
+  if (!nameInput || !startButton) {
+    console.error("Missing required elements: #player-name or #start-button");
+    return;
+  }
+
+  console.log("Found player name input and start button");
   let selectedAvatar = null;
 
   // Check for stored name
@@ -17,6 +25,7 @@ function initializeWelcomeScreen() {
   function validateForm() {
     const name = nameInput.value.trim();
     const errorElement = document.getElementById('name-error');
+    if (!errorElement) return;
     const isValid = /^[A-Za-z0-9]+$/.test(name);
     
     if (!name) {
@@ -41,6 +50,7 @@ function initializeWelcomeScreen() {
   });
 
   startButton.addEventListener('click', () => {
+    console.log("Start button clicked");
     if (nameInput.value.trim() && selectedAvatar) {
       gameState.playerName = nameInput.value.trim();
       gameState.playerTeam = selectedAvatar;
