@@ -1,0 +1,84 @@
+/* Base Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0b3d91;
+  color: white;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  max-width: 500px;
+  width: 100%;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 2px 2px #ffb400;
+}
+
+/* Team Colors */
+.bengals { background: #FB4F14; color: #000000; }
+.eagles { background: #004C54; color: #A5ACAF; }
+.cowboys { background: #003594; color: #869397; }
+.niners { background: #AA0000; color: #B3995D; }
+.bills { background: #00338D; color: #C60C30; }
+.chiefs { background: #E31837; color: #FFB81C; }
+
+/* Notification Styles */
+.notification-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.notification-content {
+  text-align: center;
+  padding: 40px;
+  border-radius: 20px;
+  animation: scaleIn 0.5s ease-out;
+}
+
+.notification-content h2 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  white-space: pre-line;
+}
+
+.notification-content.success {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.notification-content.warning {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  .stat-item {
+    border: 1px solid black;
+  }
+}
