@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math Blitz Football</title>
+  
+  <!-- Link CSS properly -->
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/team-avatars.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Math Blitz Football</h1>
+    <div class="welcome-screen" id="welcome-screen"></div>
+    <div class="difficulty-screen" id="difficulty-screen"></div>
+    <div id="game-interface" style="display: none;"></div>
+    <div class="stats-modal" id="stats-modal"></div>
+  </div>
+
+  <!-- ✅ Only JavaScript files use type="module" -->
+  <script type="module" src="./js/welcome-screen.js"></script>
+  <script type="module" src="./js/difficulty-screen.js"></script>
+  <script type="module" src="./js/game.js"></script>
+  <script type="module" src="./js/stats-modal.js"></script>
+</body>
+</html>
