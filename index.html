@@ -1,54 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Math Blitz Football</title>
-  
-  <!-- Link to CSS files -->
-  <link rel="stylesheet" href="./css/styles.css">
-  <link rel="stylesheet" href="./css/team-avatars.css">
-</head>
-<body>
-  <div class="container">
-    <h1>Math Blitz Football</h1>
+/* Restored Full CSS Styling with Fixed Keypad Layout */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0b3d91;
+  color: white;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    <!-- Welcome Screen -->
-    <div class="welcome-screen" id="welcome-screen">
-      <h2>Welcome to Math Blitz!</h2>
-      <p>Enter your name and choose your avatar to get started.</p>
-      <input type="text" id="player-name" placeholder="Enter your name">
-      <p id="name-error" style="color: red;"></p>
-      <button id="start-button">Start Game</button>
-    </div>
+.container {
+  max-width: 500px;
+  width: 100%;
+}
 
-    <!-- Difficulty Selection Screen -->
-    <div class="difficulty-screen" id="difficulty-screen" style="display: none;">
-      <h2>Select Difficulty</h2>
-      <button class="difficulty-button" data-difficulty="easy">Easy</button>
-      <button class="difficulty-button" data-difficulty="medium">Medium</button>
-      <button class="difficulty-button" data-difficulty="hard">Hard</button>
-    </div>
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 2px 2px #ffb400;
+}
 
-    <!-- Game Interface -->
-    <div id="game-interface" style="display: none;">
-      <h2>Game Screen</h2>
-      <div id="game-content"></div>
-    </div>
+/* Game Screen */
+.game-screen {
+  background: #062b59;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  display: none;
+}
 
-    <!-- Stats Modal -->
-    <div class="stats-modal" id="stats-modal" style="display: none;">
-      <h2>Game Stats</h2>
-      <p>Difficulty Level: <span id="difficulty-level"></span></p>
-      <p>Accuracy: <span id="accuracy"></span></p>
-      <button id="stats-button">Close Stats</button>
-    </div>
-  </div>
+.question {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 20px;
+  background: #0b3d91;
+  padding: 15px;
+  border-radius: 10px;
+}
 
-  <!-- JavaScript files with defer to ensure proper loading order -->
-  <script defer src="./js/welcome-screen.js"></script>
-  <script defer src="./js/difficulty-screen.js"></script>
-  <script defer src="./js/game.js"></script>
-  <script defer src="./js/stats-modal.js"></script>
-</body>
-</html>
+.answer-display {
+  background: #1a1a1a;
+  color: #ffd700;
+  padding: 10px;
+  text-align: right;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  min-height: 40px;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+  max-width: 200px;
+  margin: auto;
+}
+
+.keypad button {
+  font-size: 1.5em;
+  padding: 15px;
+  background-color: #ffb400;
+  color: #0b3d91;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 3px 3px #062b59;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 15px;
+  background: #ffb400;
+  border: none;
+  border-radius: 10px;
+  color: #0b3d91;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+}
