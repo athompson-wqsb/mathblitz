@@ -1,56 +1,79 @@
-// JavaScript code for the game logic
-function startGame(difficulty) {
-  gameState.difficulty = difficulty;
-  gameState.down = 1;
-  gameState.toGo = 10;
-  gameState.fieldPosition = 20;
-  gameState.usedQuestions = [];
-  
-  // Update the player styling with team colors
-  const playerElement = document.getElementById('player');
-  if (playerElement && gameState.playerTeam) {
-    const colors = teamColors[gameState.playerTeam];
-    playerElement.style.backgroundColor = colors.primary;
-  }
-  
-  document.getElementById('difficulty-screen').style.display = 'none';
-  document.getElementById('game-interface').style.display = 'block';
-  document.getElementById('game-screen').style.display = 'block';
-  
-  renderKeypad();
-  generateProblem();
-  movePlayers();
-  updateDisplay();
-}
+// JavaScript for the Game Logic
 
-function renderKeypad() {
-  const keypad = document.getElementById('keypad');
-  if (!keypad) return;
-  
-  keypad.innerHTML = '';
-  for (let i = 1; i <= 9; i++) {
-    const button = document.createElement('button');
-    button.innerText = i;
-    button.onclick = () => addToAnswer(i);
-    keypad.appendChild(button);
-  }
-  
-  const zeroButton = document.createElement('button');
-  zeroButton.innerText = '0';
-  zeroButton.onclick = () => addToAnswer(0);
-  
-  const clearButton = document.createElement('button');
-  clearButton.innerText = 'C';
-  clearButton.onclick = clearAnswer;
-  
-  keypad.appendChild(zeroButton);
-  keypad.appendChild(clearButton);
-}
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("Game script loaded.");
 
-// Ensure script executes only after DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  const startButton = document.getElementById('start-button');
-  if (startButton) {
-    startButton.addEventListener('click', () => startGame('default'));
-  }
+    // Get game elements
+    const gameInterface = document.getElementById("game-interface");
+    const gameContent = document.getElementById("game-content");
+    const keypad = document.createElement("div");
+    keypad.id = "keypad";
+
+    // Ensure elements exist before proceeding
+    if (!gameInterface || !gameContent) {
+        console.error("Missing required elements for the game interface.");
+        return;
+    }
+
+    gameContent.appendChild(keypad);
+
+    // Function to generate a random multiplication problem
+    function generateProblem() {
+        const num1 = Math.floor(Math.random() * 10) + 1;
+        const num2 = Math.floor(Math.random() * 10) + 1;
+        const correctAnswer = num1 * num2;
+        
+        gameContent.innerHTML = `<h3>${num1} × ${num2} = ?</h3>`;
+        gameContent.appendChild(keypad);
+
+        return correctAnswer;
+    }
+
+    // Function to set up the keypad
+    function setupKeypad(correctAnswer) {
+        keypad.innerHTML = "";
+        let answerInput = "";
+        
+        for (let i = 1; i <= 9; i++) {
+            const button = document.createElement("button");
+            button.innerText = i;
+            button.addEventListener("click", () => addToAnswer(i));
+            keypad.appendChild(button);
+        }
+        
+        const zeroButton = document.createElement("button");
+        zeroButton.innerText = "0";
+        zeroButton.addEventListener("click", () => addToAnswer(0));
+        
+        const clearButton = document.createElement("button");
+        clearButton.innerText = "C";
+        clearButton.addEventListener("click", () => {
+            answerInput = "";
+            console.log("Answer cleared");
+        });
+        
+        keypad.appendChild(zeroButton);
+        keypad.appendChild(clearButton);
+        
+        function addToAnswer(num) {
+            answerInput += num;
+            console.log("Current answer:", answerInput);
+            if (parseInt(answerInput) === correctAnswer) {
+                console.log("Correct answer!");
+                setTimeout(() => startNewRound(), 1000);
+            }
+        }
+    }
+
+    // Function to start a new round
+    function startNewRound() {
+        console.log("Starting new round...");
+        const correctAnswer = generateProblem();
+        setupKeypad(correctAnswer);
+    }
+
+    // Start the game when the difficulty screen is exited
+    const difficulty = sessionStorage.getItem("gameDifficulty") || "easy";
+    console.log("Game started at difficulty:", difficulty);
+    startNewRound();
 });
