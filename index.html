@@ -4,56 +4,256 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Math Blitz Football</title>
-  <link rel="stylesheet" href="css/main-styles.css">
-  <link rel="stylesheet" href="css/game-interface.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0b3d91;
+      color: white;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-align: center;
+      text-shadow: 2px 2px #ffb400;
+    }
+
+    /* Welcome Screen Styles */
+    .welcome-screen {
+      background: #062b59;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .welcome-screen h2 {
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .name-input {
+      width: 90%;
+      padding: 12px;
+      margin: 15px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2em;
+      text-align: center;
+      background: white;
+      color: #0b3d91;
+    }
+
+    .name-input:focus {
+      outline: 2px solid #ffb400;
+      box-shadow: 0 0 5px #ffb400;
+    }
+
+    .avatar-selection {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .avatar-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .avatar-option:hover {
+      transform: scale(1.02);
+    }
+
+    .avatar-option.selected {
+      border-color: #ffb400;
+      transform: scale(1.05);
+    }
+
+    .avatar-icon {
+      width: 40px;
+      height: 80px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-number {
+      color: white;
+      font-weight: bold;
+      font-size: 1.2em;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .avatar-option span {
+      margin-top: 5px;
+      font-weight: bold;
+    }
+
+    /* Team Colors */
+    .bengals { background: #FB4F14; color: #000000; }
+    .eagles { background: #004C54; color: #A5ACAF; }
+    .cowboys { background: #003594; color: #869397; }
+    .niners { background: #AA0000; color: #B3995D; }
+    .bills { background: #00338D; color: #C60C30; }
+    .chiefs { background: #E31837; color: #FFB81C; }
+
+    .start-button {
+      width: 90%;
+      padding: 15px;
+      margin-top: 20px;
+      background: #ffb400;
+      border: none;
+      border-radius: 10px;
+      color: #0b3d91;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .start-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background: #cccccc;
+    }
+
+    .start-button:not(:disabled):hover {
+      background: #ffd700;
+      transform: scale(1.02);
+    }
+
+    .error-message {
+      color: #ff4444;
+      font-size: 0.9em;
+      margin-top: 5px;
+      min-height: 1.2em;
+    }
+
+    /* Difficulty Selection Screen */
+    .difficulty-screen {
+      display: none;
+      background: #062b59;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .difficulty-button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      background: #ffb400;
+      border: none;
+      border-radius: 10px;
+      color: #0b3d91;
+      cursor: pointer;
+      font-size: 1.2em;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    .difficulty-button .description {
+      font-size: 0.8em;
+      opacity: 0.8;
+      display: block;
+      margin-top: 5px;
+    }
+
+    .difficulty-button.locked {
+      background: #cccccc;
+      cursor: not-allowed;
+      opacity: 0.7;
+      color: #666;
+    }
+
+    .difficulty-button.locked::after {
+      content: "🔒";
+      margin-left: 10px;
+    }
+
+    .difficulty-button.unlocked {
+      background: #ffb400;
+    }
+  </style>
 </head>
 <body>
- <div class="welcome-screen">
-  <h2>Welcome to Math Blitz!</h2>
-  <input type="text" class="name-input" id="player-name" placeholder="Enter your name (letters and numbers only)" maxlength="20">
-  <div class="error-message" id="name-error"></div>
-  
-  <h3>Choose Your Player</h3>
-  <div class="avatar-selection">
-    <div class="avatar-option bengals" data-team="bengals">
-      <div class="avatar-icon">
-        <span class="avatar-number">85</span>
+  <div class="container">
+    <h1>Math Blitz Football</h1>
+    
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcome-screen">
+      <h2>Welcome to Math Blitz!</h2>
+      <input type="text" 
+             class="name-input" 
+             id="player-name" 
+             placeholder="Enter your name (letters and numbers only)"
+             maxlength="20">
+      <div class="error-message" id="name-error"></div>
+      
+      <h3>Choose Your Player</h3>
+      <div class="avatar-selection">
+        <div class="avatar-option bengals" data-team="bengals">
+          <div class="avatar-icon">
+            <span class="avatar-number">85</span>
+          </div>
+          <span>Bengals</span>
+        </div>
+        <div class="avatar-option eagles" data-team="eagles">
+          <div class="avatar-icon">
+            <span class="avatar-number">11</span>
+          </div>
+          <span>Eagles</span>
+        </div>
+        <div class="avatar-option cowboys" data-team="cowboys">
+          <div class="avatar-icon">
+            <span class="avatar-number">88</span>
+          </div>
+          <span>Cowboys</span>
+        </div>
+        <div class="avatar-option niners" data-team="niners">
+          <div class="avatar-icon">
+            <span class="avatar-number">85</span>
+          </div>
+          <span>49ers</span>
+        </div>
+        <div class="avatar-option bills" data-team="bills">
+          <div class="avatar-icon">
+            <span class="avatar-number">17</span>
+          </div>
+          <span>Bills</span>
+        </div>
+        <div class="avatar-option chiefs" data-team="chiefs">
+          <div class="avatar-icon">
+            <span class="avatar-number">87</span>
+          </div>
+          <span>Chiefs</span>
+        </div>
       </div>
-      <span>Bengals</span>
+      <button class="start-button" id="start-button" disabled>Start Game</button>
     </div>
-    <div class="avatar-option eagles" data-team="eagles">
-      <div class="avatar-icon">
-        <span class="avatar-number">11</span>
-      </div>
-      <span>Eagles</span>
-    </div>
-    <div class="avatar-option cowboys" data-team="cowboys">
-      <div class="avatar-icon">
-        <span class="avatar-number">88</span>
-      </div>
-      <span>Cowboys</span>
-    </div>
-    <div class="avatar-option niners" data-team="niners">
-      <div class="avatar-icon">
-        <span class="avatar-number">85</span>
-      </div>
-      <span>49ers</span>
-    </div>
-    <div class="avatar-option bills" data-team="bills">
-      <div class="avatar-icon">
-        <span class="avatar-number">17</span>
-      </div>
-      <span>Bills</span>
-    </div>
-    <div class="avatar-option chiefs" data-team="chiefs">
-      <div class="avatar-icon">
-        <span class="avatar-number">87</span>
-      </div>
-      <span>Chiefs</span>
-    </div>
-  </div>
-  <button class="start-button" id="start-button" disabled>Start Game</button>
-</div>
+
     <!-- Difficulty Selection Screen -->
     <div class="difficulty-screen" id="difficulty-screen">
       <h2>Select Your Difficulty</h2>
@@ -74,79 +274,6 @@
         <span class="description">Double/Triple Digit × Double Digit</span>
       </button>
     </div>
-
-    <!-- Game Interface -->
-    <div id="game-interface" style="display: none;">
-      <div class="scoreboard">
-        <div class="scoreboard-item">Down: <span id="down">1</span></div>
-        <div class="scoreboard-item">To Go: <span id="to-go">10</span></div>
-        <div class="scoreboard-item">Ball On: <span id="field-position">20</span></div>
-        <div class="scoreboard-item">Time: <span id="timer">0:00</span></div>
-      </div>
-
-      <div class="field-container">
-        <div class="yard-markers">
-          <div class="yard-marker">0</div>
-          <div class="yard-marker">10</div>
-          <div class="yard-marker">20</div>
-          <div class="yard-marker">30</div>
-          <div class="yard-marker">40</div>
-          <div class="yard-marker">50</div>
-          <div class="yard-marker">40</div>
-          <div class="yard-marker">30</div>
-          <div class="yard-marker">20</div>
-          <div class="yard-marker">10</div>
-          <div class="yard-marker">0</div>
-        </div>
-        <div class="football" id="football"></div>
-        <div class="player" id="player"></div>
-      </div>
-
-      <div class="game-screen" id="game-screen">
-        <div class="question" id="question"></div>
-        <div class="answer-display" id="answer-display">0</div>
-        <div class="keypad" id="keypad"></div>
-        <button class="submit-button" id="submit-button">SNAP!</button>
-      </div>
-    </div>
-
-    <!-- Stats Modal -->
-    <div class="stats-modal" id="stats-modal">
-      <h2>Drive Summary</h2>
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div>Difficulty Level</div>
-          <div id="difficulty-level">Rookie</div>
-        </div>
-        <div class="stat-item">
-          <div>Average Time</div>
-          <div id="avg-time">0s</div>
-        </div>
-        <div class="stat-item">
-          <div>Accuracy</div>
-          <div id="accuracy">0%</div>
-        </div>
-        <div class="stat-item">
-          <div>Total Yards</div>
-          <div id="total-yards">0</div>
-        </div>
-        <div class="stat-item">
-          <div>First Downs</div>
-          <div id="first-downs">0</div>
-        </div>
-        <div class="stat-item">
-          <div>Total Questions</div>
-          <div id="total-questions">0</div>
-        </div>
-      </div>
-      <div class="modal-buttons">
-        <button class="modal-button print-button" onclick="printStats()">Print Stats</button>
-      </div>
-    </div>
   </div>
-
-  <script src="js/game-state.js"></script>
-  <script src="js/game-utils.js"></script>
-  <script src="js/game.js"></script>
 </body>
 </html>
