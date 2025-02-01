@@ -1,6 +1,3 @@
-import '../css/styles.css';
-import '../css/team-avatars.css';
-
 // JavaScript code for the difficulty selection screen
 function updateDifficultyButtons() {
   document.querySelectorAll('.difficulty-button').forEach(button => {
@@ -19,3 +16,6 @@ function updateDifficultyButtons() {
     }
   });
 }
+
+// Ensure script executes only after DOM is loaded
+document.addEventListener('DOMContentLoaded', updateDifficultyButtons);
