@@ -1,6 +1,3 @@
-import '../css/styles.css';
-import '../css/team-avatars.css';
-
 // JavaScript code for the game logic
 function startGame(difficulty) {
   gameState.difficulty = difficulty;
@@ -11,8 +8,10 @@ function startGame(difficulty) {
   
   // Update the player styling with team colors
   const playerElement = document.getElementById('player');
-  const colors = teamColors[gameState.playerTeam];
-  playerElement.style.backgroundColor = colors.primary;
+  if (playerElement && gameState.playerTeam) {
+    const colors = teamColors[gameState.playerTeam];
+    playerElement.style.backgroundColor = colors.primary;
+  }
   
   document.getElementById('difficulty-screen').style.display = 'none';
   document.getElementById('game-interface').style.display = 'block';
@@ -26,8 +25,9 @@ function startGame(difficulty) {
 
 function renderKeypad() {
   const keypad = document.getElementById('keypad');
-  keypad.innerHTML = '';
+  if (!keypad) return;
   
+  keypad.innerHTML = '';
   for (let i = 1; i <= 9; i++) {
     const button = document.createElement('button');
     button.innerText = i;
@@ -47,4 +47,10 @@ function renderKeypad() {
   keypad.appendChild(clearButton);
 }
 
-// Add more game-related functions here
+// Ensure script executes only after DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const startButton = document.getElementById('start-button');
+  if (startButton) {
+    startButton.addEventListener('click', () => startGame('default'));
+  }
+});
