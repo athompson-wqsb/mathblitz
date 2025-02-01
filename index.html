@@ -8,61 +8,52 @@
   <link rel="stylesheet" href="css/game-interface.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Math Blitz Football</h1>
-    
-    <!-- Welcome Screen -->
-    <div class="welcome-screen" id="welcome-screen">
-      <h2>Welcome to Math Blitz!</h2>
-      <input type="text" 
-             class="name-input" 
-             id="player-name" 
-             placeholder="Enter your name (letters and numbers only)"
-             maxlength="20">
-      <div class="error-message" id="name-error"></div>
-      
-      <h3>Choose Your Player</h3>
-      <div class="avatar-selection">
-        <div class="avatar-option bengals" data-team="bengals">
-          <div class="avatar-icon">
-            <span class="avatar-number">85</span>
-          </div>
-          <span>Bengals</span>
-        </div>
-        <div class="avatar-option eagles" data-team="eagles">
-          <div class="avatar-icon">
-            <span class="avatar-number">11</span>
-          </div>
-          <span>Eagles</span>
-        </div>
-        <div class="avatar-option cowboys" data-team="cowboys">
-          <div class="avatar-icon">
-            <span class="avatar-number">88</span>
-          </div>
-          <span>Cowboys</span>
-        </div>
-        <div class="avatar-option niners" data-team="niners">
-          <div class="avatar-icon">
-            <span class="avatar-number">85</span>
-          </div>
-          <span>49ers</span>
-        </div>
-        <div class="avatar-option bills" data-team="bills">
-          <div class="avatar-icon">
-            <span class="avatar-number">17</span>
-          </div>
-          <span>Bills</span>
-        </div>
-        <div class="avatar-option chiefs" data-team="chiefs">
-          <div class="avatar-icon">
-            <span class="avatar-number">87</span>
-          </div>
-          <span>Chiefs</span>
-        </div>
+ <div class="welcome-screen">
+  <h2>Welcome to Math Blitz!</h2>
+  <input type="text" class="name-input" id="player-name" placeholder="Enter your name (letters and numbers only)" maxlength="20">
+  <div class="error-message" id="name-error"></div>
+  
+  <h3>Choose Your Player</h3>
+  <div class="avatar-selection">
+    <div class="avatar-option bengals" data-team="bengals">
+      <div class="avatar-icon">
+        <span class="avatar-number">85</span>
       </div>
-      <button class="start-button" id="start-button" disabled>Start Game</button>
+      <span>Bengals</span>
     </div>
-
+    <div class="avatar-option eagles" data-team="eagles">
+      <div class="avatar-icon">
+        <span class="avatar-number">11</span>
+      </div>
+      <span>Eagles</span>
+    </div>
+    <div class="avatar-option cowboys" data-team="cowboys">
+      <div class="avatar-icon">
+        <span class="avatar-number">88</span>
+      </div>
+      <span>Cowboys</span>
+    </div>
+    <div class="avatar-option niners" data-team="niners">
+      <div class="avatar-icon">
+        <span class="avatar-number">85</span>
+      </div>
+      <span>49ers</span>
+    </div>
+    <div class="avatar-option bills" data-team="bills">
+      <div class="avatar-icon">
+        <span class="avatar-number">17</span>
+      </div>
+      <span>Bills</span>
+    </div>
+    <div class="avatar-option chiefs" data-team="chiefs">
+      <div class="avatar-icon">
+        <span class="avatar-number">87</span>
+      </div>
+      <span>Chiefs</span>
+    </div>
+  </div>
+  <button class="start-button" id="start-button" disabled>Start Game</button>
+</div>
     <!-- Difficulty Selection Screen -->
     <div class="difficulty-screen" id="difficulty-screen">
       <h2>Select Your Difficulty</h2>
