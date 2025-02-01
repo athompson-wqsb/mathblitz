@@ -1,4 +1,38 @@
 /* Base Styles */
+<div id="game-interface">
+  <div class="scoreboard">
+    <div class="scoreboard-item">Down: <span id="down">1</span></div>
+    <div class="scoreboard-item">To Go: <span id="to-go">10</span></div>
+    <div class="scoreboard-item">Ball On: <span id="field-position">20</span></div>
+    <div class="scoreboard-item">Time: <span id="timer">0:00</span></div>
+  </div>
+
+  <div class="field-container">
+    <div class="yard-markers">
+      <div class="yard-marker">0</div>
+      <div class="yard-marker">10</div>
+      <div class="yard-marker">20</div>
+      <div class="yard-marker">30</div>
+      <div class="yard-marker">40</div>
+      <div class="yard-marker">50</div>
+      <div class="yard-marker">40</div>
+      <div class="yard-marker">30</div>
+      <div class="yard-marker">20</div>
+      <div class="yard-marker">10</div>
+      <div class="yard-marker">0</div>
+    </div>
+    <div class="football" id="football"></div>
+    <div class="player" id="player"></div>
+  </div>
+
+  <div class="game-screen" id="game-screen">
+    <div class="question" id="question"></div>
+    <div class="answer-display" id="answer-display">0</div>
+    <div class="keypad" id="keypad"></div>
+    <button class="submit-button" id="submit-button">SNAP!</button>
+  </div>
+</div>
+
 body {
   font-family: Arial, sans-serif;
   background-color: #0b3d91;
